@@ -51,7 +51,7 @@ init_db()
 
 
 class NoteCreate(BaseModel):
-    title: str          
+    title: str
     content: str
 
 
@@ -93,7 +93,6 @@ def get_note(note_id: int):
 
 @app.post("/api/notes", response_model=NoteResponse, status_code=201)
 def create_note(note: NoteCreate):
-    
     conn = get_db()
     cursor = conn.execute(
         "INSERT INTO notes (title, content) VALUES (?, ?)",
@@ -134,3 +133,6 @@ def delete_note(note_id: int):
     conn.execute("DELETE FROM notes WHERE id = ?", (note_id,))
     conn.commit()
     conn.close()
+
+
+    
